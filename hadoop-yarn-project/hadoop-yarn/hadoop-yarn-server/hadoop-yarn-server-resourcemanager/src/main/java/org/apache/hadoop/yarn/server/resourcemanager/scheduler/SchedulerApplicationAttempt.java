@@ -552,7 +552,7 @@ public class SchedulerApplicationAttempt {
     return ApplicationResourceUsageReport.newInstance(liveContainers.size(),
                reservedContainers.size(), Resources.clone(currentConsumption),
                Resources.clone(currentReservation),
-               Resources.add(currentConsumption, currentReservation),
+               this.appSchedulingInfo.getTotalPendingRequests(),
                resUsage.getMemorySeconds(), resUsage.getVcoreSeconds());
   }
 

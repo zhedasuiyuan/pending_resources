@@ -231,6 +231,18 @@ public class AppSchedulingInfo {
     return ret;
   }
 
+  public synchronized Resource getTotalPendingRequests() {
+        Resource ret = Resource.newInstance(0, 0);
+        for (ResourceRequest rr : getAllResourceRequests()) {
+            // to avoid double counting we count only "ANY" resource requests
+            if (ResourceRequest.isAnyLocation(rr.getResourceName())){
+                Resources.addTo(ret,
+                        Resources.multiply(rr.getCapability(), rr.getNumContainers()));
+            }
+        }
+        return ret;
+    }
+
   synchronized public ResourceRequest getResourceRequest(Priority priority,
       String resourceName) {
     Map<String, ResourceRequest> nodeRequests = requests.get(priority);

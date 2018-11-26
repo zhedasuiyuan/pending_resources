@@ -527,6 +527,8 @@ public class ApplicationCLI extends YarnCLI {
         //completed app report in the timeline server doesn't have usage report
         appReportStr.print(usageReport.getMemorySeconds() + " MB-seconds, ");
         appReportStr.println(usageReport.getVcoreSeconds() + " vcore-seconds");
+        appReportStr.print("\tThe total amount of pending resources: ");
+        appReportStr.println(usageReport.getNeededResources());
       } else {
         appReportStr.println("N/A");
       }
